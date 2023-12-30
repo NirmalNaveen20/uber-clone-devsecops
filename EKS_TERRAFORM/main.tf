@@ -1,6 +1,6 @@
 # Specify the desired availability zone for the EKS cluster
 variable "availability_zone" {
-  default = "us-east-1a"
+  default = "us-east-1b"
 }
 
 data "aws_iam_policy_document" "assume_role" {
