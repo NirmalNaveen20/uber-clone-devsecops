@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "example" {
-  name               = "eks-uber1120"
+  name               = "eks-uber1120-nirmal"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -34,7 +34,7 @@ data "aws_subnets" "public" {
 }
 #cluster provision
 resource "aws_eks_cluster" "example" {
-  name     = "EKS_CLOUD"
+  name     = "eks_uber_cloud"
   role_arn = aws_iam_role.example.arn
 
   vpc_config {
@@ -49,7 +49,7 @@ resource "aws_eks_cluster" "example" {
 }
 
 resource "aws_iam_role" "example1" {
-  name = "eks-uber1120"
+  name = "eks-uber1120-nirmal"
 
   assume_role_policy = jsonencode({
     Statement = [{
