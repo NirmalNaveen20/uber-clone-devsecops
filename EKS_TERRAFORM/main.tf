@@ -1,3 +1,8 @@
+# Specify the desired availability zone for the EKS cluster
+variable "availability_zone" {
+  default = "us-east-1a"
+}
+
 data "aws_iam_policy_document" "assume_role" {
   statement {
     effect = "Allow"
@@ -12,7 +17,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "example" {
-  name               = "eks-uber1120-nirmal"
+  name               = "eks-uber1120"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -34,22 +39,21 @@ data "aws_subnets" "public" {
 }
 #cluster provision
 resource "aws_eks_cluster" "example" {
-  name     = "eks_cloud1120"
+  name     = "eks_uber_cloud"
   role_arn = aws_iam_role.example.arn
 
   vpc_config {
     subnet_ids = data.aws_subnets.public.ids
   }
 
-  # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
-  # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
+  # Specify the desired availability zone for the EKS cluster
   depends_on = [
     aws_iam_role_policy_attachment.example-AmazonEKSClusterPolicy,
   ]
 }
 
 resource "aws_iam_role" "example1" {
-  name = "eks-uber1120-nirmal-naveen"
+  name = "eks-uber1120-nirmalnaveen"
 
   assume_role_policy = jsonencode({
     Statement = [{
