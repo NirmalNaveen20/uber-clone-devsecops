@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 resource "aws_iam_role" "example" {
-  name               = "eks-uber1120-nirmal"
+  name               = "eks-uber1120"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 
@@ -49,7 +49,7 @@ resource "aws_eks_cluster" "example" {
 }
 
 resource "aws_iam_role" "example1" {
-  name = "eks-uber1120-iam"
+  name = "eks-uber1120-nirmalnaveen"
 
   assume_role_policy = jsonencode({
     Statement = [{
